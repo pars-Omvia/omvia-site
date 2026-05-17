@@ -244,8 +244,7 @@
 
 </div>
 <script>
-// reCAPTCHA — not yet configured
-const RECAPTCHA_SITE_KEY = '';
+const RECAPTCHA_SITE_KEY = '6LeWAu8sAAAAKwEG_9zFd73hfW_q9hop3Wtgpbz';
 
 let interest = 'customer';
 
@@ -369,8 +368,34 @@ function handleSubmit() {
   btn.style.opacity = '0.7';
   btn.disabled = true;
 
-  // Submit directly to Mailchimp
-  submitToMailchimp('');
+  // Execute reCAPTCHA v3, verify server-side, then submit
+  grecaptcha.ready(function() {
+    grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'signup' }).then(async function(token) {
+      try {
+        const verifyRes = await fetch('/api/verify-recaptcha', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token }),
+        });
+        const verifyData = await verifyRes.json();
+
+        if (!verifyData.success) {
+          // Likely a bot — silently block
+          btn.textContent = 'JOIN THE EARLY ACCESS LIST';
+          btn.style.opacity = '1';
+          btn.disabled = false;
+          alert('We could not verify your submission. Please try again or email hello@omvia.co.uk');
+          return;
+        }
+
+        submitToMailchimp(token);
+      } catch (err) {
+        // Network error on verify — fail open so real users aren't blocked
+        console.warn('reCAPTCHA verify failed, proceeding:', err);
+        submitToMailchimp(token);
+      }
+    });
+  });
 }
 
 // ── Mailchimp JSONP submission ───────────────────────────────────────────────
@@ -422,6 +447,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 </script>
-<!-- reCAPTCHA can be added here once a site key is obtained from https://www.google.com/recaptcha/admin/create -->
+<script src="https://www.google.com/recaptcha/api.js?render=6LeWAu8sAAAAKwEG_9zFd73hfW_q9hop3Wtgpbz"></script>
 </body>
 </html>
