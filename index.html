@@ -382,13 +382,14 @@ function submitToMailchimp(recaptchaToken) {
   const phone = document.getElementById('phone').value.trim();
   const tag   = interest === 'clinic' ? 'CLINIC' : 'CUSTOMER';
 
-  const base = 'https://omvia.us4.list-manage.com/subscribe/post-json?u=ee1655dbbe94c1e2886338412&id=b2061a24f1&f_id=00df38eaf0';
+  const base = 'https://omvia.us4.list-manage.com/subscribe/post-json?u=ee1655dbbe94c1e2886338412&id=b2061a24f1&v_id=33550&f_id=00df38eaf0';
   const params = '&EMAIL=' + encodeURIComponent(email)
     + '&FNAME=' + encodeURIComponent(fname)
     + '&LNAME=' + encodeURIComponent(lname)
     + '&PHONE=' + encodeURIComponent(phone)
     + '&COMPANY=' + encodeURIComponent(org)
     + '&tags=' + tag
+    + '&b_ee1655dbbe94c1e2886338412_b2061a24f1='
     + '&c=mailchimpCallback';
 
   window.mailchimpCallback = function(data) {
