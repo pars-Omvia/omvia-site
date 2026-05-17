@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Omvia — Precision Health · Coming Soon</title>
+<meta name="description" content="Omvia is a precision health platform offering comprehensive biomarker testing. Know your biology. Own your future.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#1e2d26;
+    --sage:#3d6b52;
+    --cream:#f0ebe4;
+    --mint:#74c69d;
+    --sage-light:#e8f5ee;
+    --sage-mid:#c8e6d4;
+    --muted:#5a6b62;
+    --muted-light:#8a9e94;
+    --border:rgba(61,107,82,0.15);
+    --bg:#f7f4f0;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Jost',sans-serif;background:var(--bg);color:var(--forest);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+  /* Subtle gradient background */
+  body::before{content:'';position:fixed;inset:0;background:linear-gradient(160deg,#f7f4f0 0%,#eef4f0 50%,#f0ebe4 100%);z-index:0;pointer-events:none}
+
+  /* Soft orbs */
+  .orb{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0}
+  .orb-1{width:700px;height:700px;background:radial-gradient(circle,rgba(61,107,82,.07) 0%,transparent 70%);top:-200px;right:-200px;animation:drift1 22s ease-in-out infinite}
+  .orb-2{width:500px;height:500px;background:radial-gradient(circle,rgba(116,198,157,.08) 0%,transparent 70%);bottom:-100px;left:-150px;animation:drift2 28s ease-in-out infinite}
+  @keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,30px)}}
+  @keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-20px)}}
+
+  .container{position:relative;z-index:1;max-width:700px;margin:0 auto;padding:0 36px}
+
+  /* Nav */
+  nav{padding:44px 0 0;display:flex;justify-content:space-between;align-items:flex-start}
+  .logo-wrap{display:flex;flex-direction:column;gap:5px}
+  .logo-name{font-family:'Jost',sans-serif;font-weight:200;font-size:22px;letter-spacing:.42em;color:var(--forest)}
+  .logo-tag{font-size:9px;letter-spacing:.38em;color:var(--sage);font-weight:300}
+  .nav-pill{font-size:11px;letter-spacing:.12em;color:var(--sage);border:.5px solid rgba(61,107,82,.3);padding:7px 16px;border-radius:100px;font-weight:300;background:rgba(61,107,82,.05)}
+
+  /* Hero */
+  .hero{padding:88px 0 0;animation:fadeUp .9s ease both;animation-delay:.15s}
+  .hero-eyebrow{font-size:11px;letter-spacing:.28em;color:var(--sage);margin-bottom:30px;font-weight:300;display:flex;align-items:center;gap:12px}
+  .hero-eyebrow::before{content:'';display:block;width:28px;height:.5px;background:var(--sage)}
+  .hero-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(54px,8vw,80px);font-weight:300;line-height:1.04;letter-spacing:-.01em;color:var(--forest);margin-bottom:34px}
+  .hero-headline em{font-style:italic;color:var(--sage)}
+  .hero-body{font-size:16px;line-height:1.9;color:var(--muted);font-weight:300;max-width:540px;margin-bottom:52px}
+
+  /* Stats */
+  .stats{display:flex;border-top:.5px solid var(--border);border-bottom:.5px solid var(--border);margin-bottom:80px;animation:fadeUp .9s ease both;animation-delay:.3s;background:rgba(255,255,255,.5)}
+  .stat{flex:1;padding:28px 0;text-align:center;border-right:.5px solid var(--border)}
+  .stat:last-child{border-right:none}
+  .stat-num{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--sage);line-height:1;margin-bottom:5px}
+  .stat-label{font-size:10px;letter-spacing:.18em;color:var(--muted-light);font-weight:300}
+
+  /* Section label */
+  .section-label{font-size:10px;letter-spacing:.38em;color:var(--sage);margin-bottom:40px;font-weight:300;display:flex;align-items:center;gap:14px}
+  .section-label::after{content:'';flex:1;height:.5px;background:var(--border)}
+
+  /* Steps */
+  .steps{display:flex;flex-direction:column;margin-bottom:80px;animation:fadeUp .9s ease both;animation-delay:.4s}
+  .step{display:grid;grid-template-columns:52px 1fr;gap:24px;padding:30px 0;border-bottom:.5px solid var(--border);align-items:start}
+  .step:first-child{border-top:.5px solid var(--border)}
+  .step-num{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--sage-mid);line-height:1;padding-top:2px}
+  .step-title{font-size:16px;font-weight:300;color:var(--forest);margin-bottom:7px;letter-spacing:.02em}
+  .step-body{font-size:14px;color:var(--muted);line-height:1.8;font-weight:300}
+
+  /* Signup */
+  .signup-section{margin-bottom:80px;animation:fadeUp .9s ease both;animation-delay:.5s}
+  .signup-card{background:rgba(255,255,255,.7);border:.5px solid var(--border);border-radius:20px;padding:52px 44px;backdrop-filter:blur(8px);box-shadow:0 4px 48px rgba(30,45,38,.06)}
+  .signup-headline{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--forest);margin-bottom:14px;line-height:1.1}
+  .signup-sub{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:36px;font-weight:300;max-width:460px}
+
+  /* Toggle */
+  .interest-toggle{display:flex;gap:8px;margin-bottom:28px}
+  .toggle-btn{flex:1;padding:11px 16px;border-radius:10px;border:.5px solid var(--border);background:var(--sage-light);color:var(--muted);font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.1em;cursor:pointer;transition:all .2s;font-weight:300}
+  .toggle-btn.active{background:var(--sage);border-color:var(--sage);color:#fff}
+  .toggle-btn:hover:not(.active){border-color:rgba(61,107,82,.4);color:var(--forest)}
+
+  /* Form */
+  .form-row{display:flex;gap:12px;margin-bottom:12px}
+  .form-field{flex:1;display:flex;flex-direction:column;gap:7px}
+  .form-field label{font-size:10px;letter-spacing:.2em;color:var(--muted-light);font-weight:300}
+  .form-field input{background:#fff;border:.5px solid var(--border);border-radius:10px;padding:14px 18px;font-family:'Jost',sans-serif;font-size:14px;font-weight:300;color:var(--forest);outline:none;transition:border-color .2s;width:100%;box-shadow:0 1px 4px rgba(30,45,38,.04)}
+  .form-field input::placeholder{color:var(--muted-light)}
+  .form-field input:focus{border-color:rgba(61,107,82,.5);box-shadow:0 0 0 3px rgba(61,107,82,.06)}
+  .clinic-field{display:none;margin-bottom:0}
+  .clinic-field.visible{display:flex}
+  .submit-btn{width:100%;padding:17px;background:var(--sage);color:#fff;border:none;border-radius:10px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.18em;font-weight:300;cursor:pointer;transition:all .2s;margin-top:10px;box-shadow:0 2px 12px rgba(61,107,82,.25)}
+  .submit-btn:hover{background:#4a7f62;box-shadow:0 4px 20px rgba(61,107,82,.35)}
+  .submit-btn:active{transform:scale(.99)}
+  .form-note{font-size:11px;color:var(--muted-light);margin-top:16px;line-height:1.7;font-weight:300}
+  .form-note a{color:var(--sage);text-decoration:none}
+
+  /* Success */
+  .success-msg{display:none;text-align:center;padding:24px 0}
+  .success-msg.visible{display:block}
+  .success-icon{width:60px;height:60px;border-radius:50%;background:var(--sage-light);border:.5px solid rgba(61,107,82,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-size:24px;color:var(--sage)}
+  .success-title{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--forest);margin-bottom:12px}
+  .success-body{font-size:14px;color:var(--muted);line-height:1.8;font-weight:300}
+
+  /* Footer */
+  footer{border-top:.5px solid var(--border);padding:40px 0 52px;display:flex;justify-content:space-between;align-items:center;animation:fadeUp .9s ease both;animation-delay:.6s}
+  .footer-logo{font-family:'Jost',sans-serif;font-weight:200;font-size:14px;letter-spacing:.42em;color:var(--muted-light)}
+  .footer-links{display:flex;gap:28px}
+  .footer-links a{font-size:11px;color:var(--muted-light);text-decoration:none;letter-spacing:.1em;transition:color .2s;font-weight:300}
+  .footer-links a:hover{color:var(--forest)}
+
+  .req{color:#e05a5a;font-size:10px}
+  .req-clinic{color:var(--muted-light);font-size:10px;font-weight:300}
+  .field-error{font-size:11px;color:#e05a5a;margin-top:4px;display:block;min-height:16px;font-weight:300}
+  .form-field input.error{border-color:rgba(224,90,90,0.6);box-shadow:0 0 0 3px rgba(224,90,90,0.08)}
+  .form-field input.valid{border-color:rgba(61,107,82,0.5)}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+  @media(max-width:600px){
+    .container{padding:0 24px}
+    nav{padding-top:32px}
+    .hero{padding-top:60px}
+    .form-row{flex-direction:column}
+    .signup-card{padding:36px 24px}
+    .interest-toggle{flex-direction:column}
+    footer{flex-direction:column;gap:20px;text-align:center}
+    .stats{flex-wrap:wrap}
+    .stat{min-width:50%}
+  }
+</style>
+</head>
+<body>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="container">
+
+  <nav>
+    <div class="logo-wrap">
+      <div class="logo-name">OMVIA</div>
+      <div class="logo-tag">PRECISION HEALTH</div>
+    </div>
+    <div class="nav-pill">Launching 2026</div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-eyebrow">Biomarker Intelligence · London</div>
+    <h1 class="hero-headline">Know your<br/>biology.<br/>Own your <em>future.</em></h1>
+    <p class="hero-body">Omvia is a precision health platform launching in the UK. A single blood draw unlocks over 1,000 biomarkers — giving you the clearest picture of your health available outside a hospital. Clinically interpreted. Beautifully explained. Yours to act on.</p>
+  </section>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num">1,000+</div><div class="stat-label">Biomarkers</div></div>
+    <div class="stat"><div class="stat-num">48h</div><div class="stat-label">Results</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Accredited</div></div>
+  </div>
+
+  <div class="section-label">How it works</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content"><div class="step-title">Book online</div><div class="step-body">Choose your nearest partner clinic and select a convenient appointment time. Pay securely online.</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content"><div class="step-title">Single blood draw</div><div class="step-body">Visit your clinic for a quick blood draw. Your sample is processed by accredited UK laboratories using clinical-grade analysis.</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content"><div class="step-title">Results in 48 hours</div><div class="step-body">Receive a comprehensive, beautifully explained report covering 1,000+ biomarkers — cardiovascular risk, hormones, inflammation, metabolic health, and more.</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content"><div class="step-title">Act on what matters</div><div class="step-body">Understand exactly what your results mean and what to do about them. Optional consultation with a health specialist to guide your next steps.</div></div>
+    </div>
+  </div>
+
+  <section class="signup-section" id="signup">
+    <div class="signup-card">
+      <h2 class="signup-headline">Be the first<br/>to know.</h2>
+      <p class="signup-sub">We're launching in London in 2026. Join our early access list for launch updates, founding member pricing, and first access to book your test.</p>
+      <div class="interest-toggle">
+        <button class="toggle-btn active" onclick="setInterest('customer',this)">I want to get tested</button>
+        <button class="toggle-btn" onclick="setInterest('clinic',this)">I'm a clinic / partner</button>
+      </div>
+      <div id="signup-form">
+        <div class="form-row">
+          <div class="form-field">
+            <label>FIRST NAME <span class="req">*</span></label>
+            <input type="text" id="fname" placeholder="Your first name" autocomplete="given-name">
+            <span class="field-error" id="err-fname"></span>
+          </div>
+          <div class="form-field">
+            <label>LAST NAME <span class="req">*</span></label>
+            <input type="text" id="lname" placeholder="Your last name" autocomplete="family-name">
+            <span class="field-error" id="err-lname"></span>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>EMAIL ADDRESS <span class="req">*</span></label>
+            <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+            <span class="field-error" id="err-email"></span>
+          </div>
+        </div>
+        <div class="form-row clinic-field" id="phone-field">
+          <div class="form-field">
+            <label>TELEPHONE <span class="req">*</span></label>
+            <input type="tel" id="phone" placeholder="+44 7700 000000" autocomplete="tel">
+            <span class="field-error" id="err-phone"></span>
+          </div>
+        </div>
+        <div class="form-row clinic-field" id="clinic-field">
+          <div class="form-field">
+            <label>CLINIC OR ORGANISATION NAME <span class="req">*</span></label>
+            <input type="text" id="org" placeholder="Your clinic or organisation">
+            <span class="field-error" id="err-org"></span>
+          </div>
+        </div>
+        <div class="form-row" id="captcha-notice" style="margin-bottom:4px">
+          <p style="font-size:11px;color:var(--muted-light);font-weight:300;line-height:1.6">This form is protected by reCAPTCHA. The Google <a href="https://policies.google.com/privacy" style="color:var(--sage)">Privacy Policy</a> and <a href="https://policies.google.com/terms" style="color:var(--sage)">Terms of Service</a> apply.</p>
+        </div>
+        <button class="submit-btn" id="submit-btn" onclick="handleSubmit()">JOIN THE EARLY ACCESS LIST</button>
+        <p class="form-note">Fields marked <span class="req">*</span> are required. By signing up you agree to receive updates from Omvia. We will never share your details with third parties. View our <a href="privacy.html">privacy policy</a>.</p>
+      </div>
+      <div class="success-msg" id="success-msg">
+        <div class="success-icon">✓</div>
+        <div class="success-title">You're on the list.</div>
+        <div class="success-body">Thank you for your interest in Omvia. We'll be in touch with launch updates and early access details very soon.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">OMVIA</div>
+    <div class="footer-links">
+      <a href="#signup">Early access</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="mailto:hello@omvia.co.uk">Contact</a>
+    </div>
+  </footer>
+
+</div>
+<script>
+// ── reCAPTCHA site key ──────────────────────────────────────────────────────
+// IMPORTANT: Replace this with your real reCAPTCHA v3 site key
+// Get one free at: https://www.google.com/recaptcha/admin/create
+// Choose reCAPTCHA v3, add omvia.co.uk as your domain
+const RECAPTCHA_SITE_KEY = 'YOUR_RECAPTCHA_SITE_KEY_HERE';
+
+let interest = 'customer';
+
+// ── Interest toggle ──────────────────────────────────────────────────────────
+function setInterest(type, btn) {
+  interest = type;
+  document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cf = document.getElementById('clinic-field');
+  const pf = document.getElementById('phone-field');
+  if (type === 'clinic') {
+    cf.classList.add('visible');
+    pf.classList.add('visible');
+  } else {
+    cf.classList.remove('visible');
+    pf.classList.remove('visible');
+    clearError('org');
+    clearError('phone');
+    document.getElementById('phone').value = '';
+    document.getElementById('org').value = '';
+  }
+}
+
+// ── Field validation helpers ─────────────────────────────────────────────────
+function showError(id, msg) {
+  const el = document.getElementById('err-' + id);
+  const input = document.getElementById(id);
+  if (el) el.textContent = msg;
+  if (input) { input.classList.add('error'); input.classList.remove('valid'); }
+}
+
+function clearError(id) {
+  const el = document.getElementById('err-' + id);
+  const input = document.getElementById(id);
+  if (el) el.textContent = '';
+  if (input) { input.classList.remove('error'); }
+}
+
+function markValid(id) {
+  const input = document.getElementById(id);
+  const el = document.getElementById('err-' + id);
+  if (input) { input.classList.remove('error'); input.classList.add('valid'); }
+  if (el) el.textContent = '';
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function isValidPhone(phone) {
+  // Accept UK and international formats
+  const cleaned = phone.replace(/[\s\-\(\)]/g, '');
+  return /^(\+?44|0)[0-9]{9,10}$/.test(cleaned) || /^\+[1-9][0-9]{7,14}$/.test(cleaned);
+}
+
+// ── Live validation on blur ──────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  const fields = ['fname','lname','email','phone','org'];
+  fields.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('blur', function() { validateField(id); });
+    el.addEventListener('input', function() {
+      if (el.classList.contains('error')) validateField(id);
+    });
+  });
+});
+
+function validateField(id) {
+  const val = document.getElementById(id) ? document.getElementById(id).value.trim() : '';
+  switch(id) {
+    case 'fname':
+      if (!val) { showError('fname', 'First name is required'); return false; }
+      if (val.length < 2) { showError('fname', 'Please enter a valid first name'); return false; }
+      markValid('fname'); return true;
+    case 'lname':
+      if (!val) { showError('lname', 'Last name is required'); return false; }
+      if (val.length < 2) { showError('lname', 'Please enter a valid last name'); return false; }
+      markValid('lname'); return true;
+    case 'email':
+      if (!val) { showError('email', 'Email address is required'); return false; }
+      if (!isValidEmail(val)) { showError('email', 'Please enter a valid email address'); return false; }
+      markValid('email'); return true;
+    case 'phone':
+      if (interest === 'clinic') {
+        if (!val) { showError('phone', 'Phone number is required for clinic/partner enquiries'); return false; }
+        if (!isValidPhone(val)) { showError('phone', 'Please enter a valid UK or international phone number'); return false; }
+      }
+      markValid('phone'); return true;
+    case 'org':
+      if (interest === 'clinic') {
+        if (!val) { showError('org', 'Clinic or organisation name is required'); return false; }
+        if (val.length < 2) { showError('org', 'Please enter your clinic or organisation name'); return false; }
+      }
+      markValid('org'); return true;
+    default: return true;
+  }
+}
+
+// ── Full form validation ─────────────────────────────────────────────────────
+function validateForm() {
+  const fields = interest === 'clinic'
+    ? ['fname','lname','email','phone','org']
+    : ['fname','lname','email'];
+  let valid = true;
+  fields.forEach(id => { if (!validateField(id)) valid = false; });
+  return valid;
+}
+
+// ── Submit handler ───────────────────────────────────────────────────────────
+function handleSubmit() {
+  if (!validateForm()) {
+    // Scroll to first error
+    const firstError = document.querySelector('.form-field input.error');
+    if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  const btn = document.getElementById('submit-btn');
+  btn.textContent = 'Submitting...';
+  btn.style.opacity = '0.7';
+  btn.disabled = true;
+
+  // reCAPTCHA v3 — if site key is set, use it; otherwise submit directly
+  if (RECAPTCHA_SITE_KEY && RECAPTCHA_SITE_KEY !== 'YOUR_RECAPTCHA_SITE_KEY_HERE' && window.grecaptcha) {
+    grecaptcha.ready(function() {
+      grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'signup' }).then(function(token) {
+        submitToMailchimp(token);
+      });
+    });
+  } else {
+    submitToMailchimp('');
+  }
+}
+
+// ── Mailchimp JSONP submission ───────────────────────────────────────────────
+function submitToMailchimp(recaptchaToken) {
+  const fname = document.getElementById('fname').value.trim();
+  const lname = document.getElementById('lname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const org   = document.getElementById('org').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const tag   = interest === 'clinic' ? 'CLINIC' : 'CUSTOMER';
+
+  const base = 'https://omvia.us4.list-manage.com/subscribe/post-json?u=ee1655dbbe94c1e2886338412&id=b2061a24f1&f_id=00df38eaf0';
+  const params = '&EMAIL=' + encodeURIComponent(email)
+    + '&FNAME=' + encodeURIComponent(fname)
+    + '&LNAME=' + encodeURIComponent(lname)
+    + '&PHONE=' + encodeURIComponent(phone)
+    + '&COMPANY=' + encodeURIComponent(org)
+    + '&tags=' + tag
+    + '&c=mailchimpCallback';
+
+  window.mailchimpCallback = function(data) {
+    const btn = document.getElementById('submit-btn');
+    if (data.result === 'success' || (data.msg && data.msg.includes('already subscribed'))) {
+      document.getElementById('signup-form').style.display = 'none';
+      document.getElementById('success-msg').classList.add('visible');
+      document.getElementById('signup').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      btn.textContent = 'JOIN THE EARLY ACCESS LIST';
+      btn.style.opacity = '1';
+      btn.disabled = false;
+      const msg = data.msg ? data.msg.replace('0 - ', '') : 'Something went wrong.';
+      alert(msg + ' Please try again or email hello@omvia.co.uk');
+    }
+  };
+
+  const script = document.createElement('script');
+  script.src = base + params;
+  document.body.appendChild(script);
+}
+
+// ── Smooth scroll ────────────────────────────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+<!-- reCAPTCHA v3 — replace YOUR_RECAPTCHA_SITE_KEY_HERE with your real key -->
+<!-- Get your free key at: https://www.google.com/recaptcha/admin/create -->
+<!-- <script src="https://www.google.com/recaptcha/api.js?render=YOUR_RECAPTCHA_SITE_KEY_HERE"></script> -->
+</body>
+</html>
