@@ -9,12 +9,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
-  :root{--forest:#1e2d26;--sage:#3d6b52;--cream:#f0ebe4;--mint:#74c69d;--sage-light:#e8f5ee;--muted:#5a6b62;--muted-light:#8a9e94;--border:rgba(61,107,82,0.15);--bg:#f7f4f0}
+  :root{--forest:#1e2d26;--sage:#3d6b52;--cream:#f0ebe4;--mint:#74c69d;--sage-light:#e8f5ee;--muted:#3a4a40;--muted-light:#5a6b62;--border:rgba(61,107,82,0.15);--bg:#ffffff}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{font-family:'Jost',sans-serif;background:var(--bg);color:var(--forest);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-  body::before{content:'';position:fixed;inset:0;background:linear-gradient(160deg,#f7f4f0 0%,#eef4f0 50%,#f0ebe4 100%);z-index:0;pointer-events:none}
-  .container{position:relative;z-index:1;max-width:700px;margin:0 auto;padding:0 36px}
+  body::before{content:'';position:fixed;inset:0;background:linear-gradient(160deg,#ffffff 0%,#f5faf7 50%,#f7f4f0 100%);z-index:0;pointer-events:none}
+  .container{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:0 48px}
 
   /* Nav */
   nav{padding:44px 0 0;display:flex;justify-content:space-between;align-items:flex-start}
@@ -37,10 +37,10 @@
   .section{margin-bottom:48px}
   h2{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--forest);margin-bottom:16px;padding-top:8px}
   h3{font-size:14px;font-weight:400;color:var(--forest);margin-bottom:10px;margin-top:24px;letter-spacing:.02em}
-  p{font-size:14px;color:var(--muted);line-height:1.85;font-weight:300;margin-bottom:14px}
+  p{font-size:16px;color:var(--muted);line-height:1.85;font-weight:300;margin-bottom:14px}
   p:last-child{margin-bottom:0}
   ul{list-style:none;padding:0;margin-bottom:14px}
-  ul li{font-size:14px;color:var(--muted);line-height:1.85;font-weight:300;padding:4px 0 4px 18px;position:relative}
+  ul li{font-size:16px;color:var(--muted);line-height:1.85;font-weight:300;padding:4px 0 4px 18px;position:relative}
   ul li::before{content:'—';position:absolute;left:0;color:var(--sage);font-size:12px}
   a{color:var(--sage);text-decoration:none}
   a:hover{text-decoration:underline}
@@ -56,7 +56,7 @@
   .footer-links a:hover{color:var(--forest)}
 
   @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-  @media(max-width:600px){.container{padding:0 24px}nav{padding-top:32px}.page-title{font-size:38px}footer{flex-direction:column;gap:20px;text-align:center}}
+  @media(max-width:768px){.container{padding:0 24px}nav{padding-top:32px}.page-title{font-size:38px}footer{flex-direction:column;gap:20px;text-align:center}}
 </style>
 </head>
 <body>
