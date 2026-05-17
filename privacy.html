@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
-  :root{--forest:#1e2d26;--sage:#3d6b52;--cream:#f0ebe4;--mint:#74c69d;--sage-light:#e8f5ee;--muted:#3a4a40;--muted-light:#5a6b62;--border:rgba(61,107,82,0.15);--bg:#ffffff}
+  :root{--forest:#0d1a12;--sage:#2d5a40;--cream:#f0ebe4;--mint:#74c69d;--sage-light:#e8f5ee;--muted:#2a3d30;--muted-light:#3d5245;--border:rgba(61,107,82,0.15);--bg:#ffffff}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{font-family:'Jost',sans-serif;background:var(--bg);color:var(--forest);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
@@ -19,28 +19,28 @@
   /* Nav */
   nav{padding:44px 0 0;display:flex;justify-content:space-between;align-items:flex-start}
   .logo-wrap{display:flex;flex-direction:column;gap:5px;text-decoration:none}
-  .logo-name{font-family:'Jost',sans-serif;font-weight:200;font-size:22px;letter-spacing:.42em;color:var(--forest)}
-  .logo-tag{font-size:9px;letter-spacing:.38em;color:var(--sage);font-weight:300}
-  .nav-back{font-size:12px;letter-spacing:.1em;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:8px;font-weight:300;transition:color .2s;padding-top:6px}
+  .logo-name{font-family:'Jost',sans-serif;font-weight:300;font-size:28px;letter-spacing:.42em;color:var(--forest)}
+  .logo-tag{font-size:11px;letter-spacing:.38em;color:var(--sage);font-weight:400}
+  .nav-back{font-size:14px;letter-spacing:.1em;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:8px;font-weight:400;transition:color .2s;padding-top:8px}
   .nav-back:hover{color:var(--forest)}
   .nav-back::before{content:'←';font-size:14px}
 
   /* Header */
   .page-header{padding:64px 0 48px;border-bottom:.5px solid var(--border);margin-bottom:56px;animation:fadeUp .9s ease both}
-  .page-eyebrow{font-size:10px;letter-spacing:.35em;color:var(--sage);margin-bottom:20px;font-weight:300}
+  .page-eyebrow{font-size:13px;letter-spacing:.35em;color:var(--sage);margin-bottom:20px;font-weight:500}
   .page-title{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;line-height:1.05;color:var(--forest);margin-bottom:16px}
-  .page-meta{font-size:13px;color:var(--muted-light);font-weight:300;line-height:1.7}
+  .page-meta{font-size:14px;color:#3d5245;font-weight:400;line-height:1.7}
   .page-meta strong{color:var(--muted);font-weight:400}
 
   /* Content */
   .content{animation:fadeUp .9s ease both;animation-delay:.2s;padding-bottom:80px}
   .section{margin-bottom:48px}
-  h2{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--forest);margin-bottom:16px;padding-top:8px}
-  h3{font-size:14px;font-weight:400;color:var(--forest);margin-bottom:10px;margin-top:24px;letter-spacing:.02em}
-  p{font-size:16px;color:var(--muted);line-height:1.85;font-weight:300;margin-bottom:14px}
+  h2{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:#0d1a12;margin-bottom:16px;padding-top:8px}
+  h3{font-size:15px;font-weight:500;color:#0d1a12;margin-bottom:10px;margin-top:24px;letter-spacing:.02em}
+  p{font-size:16px;color:#2a3d30;line-height:1.85;font-weight:400;margin-bottom:14px}
   p:last-child{margin-bottom:0}
   ul{list-style:none;padding:0;margin-bottom:14px}
-  ul li{font-size:16px;color:var(--muted);line-height:1.85;font-weight:300;padding:4px 0 4px 18px;position:relative}
+  ul li{font-size:16px;color:#2a3d30;line-height:1.85;font-weight:400;padding:4px 0 4px 18px;position:relative}
   ul li::before{content:'—';position:absolute;left:0;color:var(--sage);font-size:12px}
   a{color:var(--sage);text-decoration:none}
   a:hover{text-decoration:underline}
@@ -50,9 +50,9 @@
 
   /* Footer */
   footer{border-top:.5px solid var(--border);padding:40px 0 52px;display:flex;justify-content:space-between;align-items:center}
-  .footer-logo{font-family:'Jost',sans-serif;font-weight:200;font-size:14px;letter-spacing:.42em;color:var(--muted-light)}
+  .footer-logo{font-family:'Jost',sans-serif;font-weight:300;font-size:14px;letter-spacing:.42em;color:#3d5245}
   .footer-links{display:flex;gap:28px}
-  .footer-links a{font-size:11px;color:var(--muted-light);text-decoration:none;letter-spacing:.1em;transition:color .2s;font-weight:300}
+  .footer-links a{font-size:12px;color:#3d5245;text-decoration:none;letter-spacing:.1em;transition:color .2s;font-weight:400}
   .footer-links a:hover{color:var(--forest)}
 
   @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
