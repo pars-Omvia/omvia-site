@@ -382,13 +382,15 @@ function submitToMailchimp(recaptchaToken) {
   const phone = document.getElementById('phone').value.trim();
   const tag   = interest === 'clinic' ? 'CLINIC' : 'CUSTOMER';
 
-  const base = 'https://omvia.us4.list-manage.com/subscribe/post-json?u=ee1655dbbe94c1e2886338412&id=b2061a24f1&v_id=33550&f_id=00df38eaf0';
+  const base = 'https://omvia.us4.list-manage.com/subscribe/post-json?u=ee1655dbbe94c1e2886338412&id=b2061a24f1&v_id=33551&f_id=00df38eaf0';
+  // Group IDs: Customer=357294, Clinic Partner=357295
+  const groupId = interest === 'clinic' ? '357295' : '357294';
   const params = '&EMAIL=' + encodeURIComponent(email)
     + '&FNAME=' + encodeURIComponent(fname)
     + '&LNAME=' + encodeURIComponent(lname)
     + '&PHONE=' + encodeURIComponent(phone)
     + '&COMPANY=' + encodeURIComponent(org)
-    + '&tags=' + tag
+    + '&group[441968][' + groupId + ']=1'
     + '&b_ee1655dbbe94c1e2886338412_b2061a24f1='
     + '&c=mailchimpCallback';
 
