@@ -244,11 +244,8 @@
 
 </div>
 <script>
-// ── reCAPTCHA site key ──────────────────────────────────────────────────────
-// IMPORTANT: Replace this with your real reCAPTCHA v3 site key
-// Get one free at: https://www.google.com/recaptcha/admin/create
-// Choose reCAPTCHA v3, add omvia.co.uk as your domain
-const RECAPTCHA_SITE_KEY = 'YOUR_RECAPTCHA_SITE_KEY_HERE';
+// reCAPTCHA — not yet configured
+const RECAPTCHA_SITE_KEY = '';
 
 let interest = 'customer';
 
@@ -372,16 +369,8 @@ function handleSubmit() {
   btn.style.opacity = '0.7';
   btn.disabled = true;
 
-  // reCAPTCHA v3 — if site key is set, use it; otherwise submit directly
-  if (RECAPTCHA_SITE_KEY && RECAPTCHA_SITE_KEY !== 'YOUR_RECAPTCHA_SITE_KEY_HERE' && window.grecaptcha) {
-    grecaptcha.ready(function() {
-      grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'signup' }).then(function(token) {
-        submitToMailchimp(token);
-      });
-    });
-  } else {
-    submitToMailchimp('');
-  }
+  // Submit directly to Mailchimp
+  submitToMailchimp('');
 }
 
 // ── Mailchimp JSONP submission ───────────────────────────────────────────────
@@ -430,8 +419,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 </script>
-<!-- reCAPTCHA v3 — replace YOUR_RECAPTCHA_SITE_KEY_HERE with your real key -->
-<!-- Get your free key at: https://www.google.com/recaptcha/admin/create -->
-<!-- <script src="https://www.google.com/recaptcha/api.js?render=YOUR_RECAPTCHA_SITE_KEY_HERE"></script> -->
+<!-- reCAPTCHA can be added here once a site key is obtained from https://www.google.com/recaptcha/admin/create -->
 </body>
 </html>
